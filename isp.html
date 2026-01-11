@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Information Security Policy — MoneyMancer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Information Security Policy</h1>
+      <p class="tagline">Security measures and practices for MoneyMancer.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <p style="margin-bottom: 24px;"><a href="index.html">← Back to Home</a></p>
+
+    <section>
+      <h1>Information Security Policy — MoneyMancer</h1>
+      <p><strong>Scope:</strong> This policy applies to the MoneyMancer project as operated by a single developer (user 0) in a limited, early testing environment.</p>
+      <h2>Security objectives</h2>
+      <ul>
+        <li>Protect user 0’s financial data from unauthorized access.</li>
+        <li>Ensure Plaid data ingestion occurs only with explicit user 0 consent.</li>
+        <li>Maintain integrity of transaction data and processing pipelines.</li>
+      </ul>
+      <h2>Access control</h2>
+      <ul>
+        <li>Access is limited to the single developer and controlled manually.</li>
+        <li>Credentials are stored in local environment variables and database secrets.</li>
+        <li>Planned improvement: centralized IAM, MFA enforcement, and RBAC if the project becomes multi-user.</li>
+      </ul>
+      <h2>Data protection</h2>
+      <ul>
+        <li>Data in transit to Plaid uses HTTPS endpoints.</li>
+        <li>At-rest encryption is not explicitly configured in code and relies on database/hosting defaults.</li>
+      </ul>
+      <h2>Vulnerability management</h2>
+      <ul>
+        <li>Dependencies are reviewed manually; no automated scanning is configured yet.</li>
+        <li>Patching targets: Critical — 7 days; High — 30 days; Medium/Low — best effort.</li>
+      </ul>
+      <h2>Incident response</h2>
+      <ul>
+        <li>Any suspected security incident triggers immediate review of credentials and service access.</li>
+        <li>Data access is paused until root cause is understood and mitigations are applied.</li>
+      </ul>
+      <h2>Policy maintenance</h2>
+      <p>This policy is reviewed when major architectural changes occur or when the project expands beyond a single-developer scope.</p>
+      <p><em>Last updated: 2026-01-11</em></p>
+      <p>See the <a href="./plaid_attestations.html">Plaid Security Attestations</a> page for control-specific acknowledgements.</p>
+    </section>
+  </main>
+</body>
+</html>

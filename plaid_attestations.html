@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plaid Security Attestations — MoneyMancer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="meta">
+        <span class="tag">Plaid Compliance</span>
+      </div>
+      <h1>Plaid Security Attestations — MoneyMancer</h1>
+      <p>Single-developer personal finance project used by "user 0" for early real-world testing.</p>
+      <p>This page documents current, repo-grounded controls and clearly states gaps or planned improvements.</p>
+    </div>
+  </header>
+  <main class="container">
+    <p style="margin-bottom: 24px;"><a href="index.html">← Back to Home</a></p>
+
+    <section class="card">
+      <h2>Table of contents</h2>
+      <nav aria-label="Table of contents">
+        <ul>
+          <li><a href="#attestations">Attestations</a></li>
+          <li><a href="#policies">Project policies (current state)</a></li>
+          <li><a href="#last-updated">Last updated</a></li>
+        </ul>
+      </nav>
+    </section>
+
+    <section id="attestations">
+      <h2>Attestations</h2>
+
+      <div class="attestation" id="attestation-1">
+        <h3>1) Centralized identity and access management</h3>
+        <blockquote>Attest that your organization has implemented centralized identity and access management solutions</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer is operated by a single developer (user 0) and does not yet use a centralized IAM platform; access is managed manually through local credentials and repository permissions. The current access control approach and future intent are documented in the Access Control policy on this page, and the server configuration relies on local environment variables for credentials.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="#policy-access-control">Access Control policy (current state)</a></li>
+            <li><a href="https://github.com/your-org/MoneyMancer-Server/blob/main/server/main.py">server/main.py (loads .env configuration and credentials)</a></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="attestation" id="attestation-2">
+        <h3>2) Automated de-provisioning/modification of access</h3>
+        <blockquote>Attest that your organization has implemented automated de-provisioning/modification of access for terminated or transferred employees</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer currently has no automated de-provisioning workflow because it is a single-developer project; access changes are handled manually by removing credentials and repo access. The current manual process is described in the Access Control policy on this page.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="#policy-access-control">Access Control policy (manual de-provisioning)</a></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="attestation" id="attestation-3">
+        <h3>3) Securing data in-transit communications</h3>
+        <blockquote>Attest that your organization secures data in-transit communications</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer communicates with Plaid over HTTPS endpoints, and Plaid Link is loaded from the official HTTPS CDN; other transport security depends on the deployment environment. The Plaid client configuration and the front-end Plaid Link loader are implemented in the repo.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="https://github.com/your-org/MoneyMancer-Server/blob/main/server/ingestion/plaid/plaid_client.py">server/ingestion/plaid/plaid_client.py (HTTPS Plaid hosts)</a></li>
+            <li><a href="https://github.com/your-org/MoneyMancer-Server/blob/main/client/index.html">client/index.html (Plaid Link HTTPS script)</a></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="attestation" id="attestation-4">
+        <h3>4) Published privacy policy</h3>
+        <blockquote>Attest that your organization has published a privacy policy</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer has a published privacy policy that describes current data collection and usage for this single-developer project. The policy is available as a standalone page in this documentation site.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="./privacy.html">Privacy Policy (docs/privacy.html)</a></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="attestation" id="attestation-5">
+        <h3>5) Information Security Policy (ISP)</h3>
+        <blockquote>Attest that your organization has created an Information Security Policy (ISP)</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer has a documented Information Security Policy tailored to its current single-developer scope and data handling practices. The ISP is published as a standalone page in this documentation site.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="./isp.html">Information Security Policy (docs/isp.html)</a></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="attestation" id="attestation-6">
+        <h3>6) MFA on consumer-facing application</h3>
+        <blockquote>Attest that your organization has implemented multi-factor authentication (MFA) on the consumer-facing application where Plaid Link is deployed</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer does not currently have a consumer-facing login or account system; Plaid Link is used in a local demo UI for user 0, so MFA for consumer logins is not implemented. The current front-end implementation is a static demo that launches Plaid Link without user authentication.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="https://github.com/your-org/MoneyMancer-Server/blob/main/client/index.html">client/index.html (Plaid Link demo UI)</a></li>
+            <li><a href="https://github.com/your-org/MoneyMancer-Server/blob/main/client/main.js">client/main.js (Plaid Link initialization flow)</a></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="attestation" id="attestation-7">
+        <h3>7) EOL software monitoring</h3>
+        <blockquote>Attest that your organization monitors end-of-life (EOL) software in use and updates policies to include EOL management practices</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer does not yet have automated EOL monitoring; the single developer performs manual reviews and tracks upgrades as needed. The current EOL management expectations are documented in the Vulnerability &amp; Patch Management policy section below.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="#policy-vuln-management">Vulnerability &amp; Patch Management policy (EOL tracking expectations)</a></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="attestation" id="attestation-8">
+        <h3>8) Role-based access control (RBAC)</h3>
+        <blockquote>Attest that your organization has implemented role-based access control (RBAC)</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer does not currently implement RBAC; the API is a single-user, developer-operated service without role distinctions. The current access model is documented in the Access Control policy on this page.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="#policy-access-control">Access Control policy (no RBAC in current scope)</a></li>
+            <li><a href="https://github.com/your-org/MoneyMancer-Server/blob/main/server/main.py">server/main.py (public API routes without auth roles)</a></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="attestation" id="attestation-9">
+        <h3>9) Documented access control policy</h3>
+        <blockquote>Attest that your organization has implemented a defined and documented access control policy</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer has a defined access control policy describing how access is granted, reviewed, and revoked for its single-developer scope. The policy is published in the “Project policies” section below.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="#policy-access-control">Access Control policy (current state)</a></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="attestation" id="attestation-10">
+        <h3>10) Vulnerability patching SLA</h3>
+        <blockquote>Attest that your organization patches identified vulnerabilities within a defined SLA</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer has a documented patching SLA for the current single-developer environment; the policy defines remediation timelines by severity, even though automation is limited. The SLA is published in the Vulnerability &amp; Patch Management policy section below.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="#policy-vuln-management">Vulnerability &amp; Patch Management policy (SLA)</a></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="attestation" id="attestation-11">
+        <h3>11) Data deletion and retention policy</h3>
+        <blockquote>Attest that your organization has implemented a data deletion and retention policy</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer maintains a documented retention and deletion policy describing how data is kept and how user 0 can request deletion, with current manual procedures. The policy references current ingestion behavior, including tombstoning rules for transactions, and is documented below.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="#policy-retention">Data Retention &amp; Deletion policy (current state)</a></li>
+            <li><a href="https://github.com/your-org/MoneyMancer-Server/blob/main/documentation/ingestion/ingestion_contract.md">documentation/ingestion/ingestion_contract.md (tombstoning instead of deletion)</a></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="attestation" id="attestation-12">
+        <h3>12) MFA on internal systems</h3>
+        <blockquote>Attest that your organization has implemented multi-factor authentication (MFA) on internal systems that store or process consumer data</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer does not yet enforce MFA through application code on internal systems; access is limited to the single developer and governed by the Access Control policy on this page. MFA enforcement is planned for hosting and source-control accounts when the project expands beyond user 0.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="#policy-access-control">Access Control policy (current state and MFA intent)</a></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="attestation" id="attestation-13">
+        <h3>13) Vulnerability scanning</h3>
+        <blockquote>Attest that your organization performs vulnerability scanning</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer does not yet have automated vulnerability scanning configured; dependency review is performed manually by the single developer. Planned improvements and current limitations are documented in the Vulnerability &amp; Patch Management policy section below.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="#policy-vuln-management">Vulnerability &amp; Patch Management policy (current state)</a></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="attestation" id="attestation-14">
+        <h3>14) Consent process</h3>
+        <blockquote>Attest that your organization has implemented a process to obtain and track consent</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer obtains consent through the Plaid Link flow initiated by user 0, but does not yet store a dedicated consent audit record. The consent flow and current limitations are documented in the Consent Tracking policy section and the Plaid Link front-end implementation.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="#policy-consent">Consent Tracking policy (current state)</a></li>
+            <li><a href="https://github.com/your-org/MoneyMancer-Server/blob/main/client/index.html">client/index.html (Plaid Link UI)</a></li>
+            <li><a href="https://github.com/your-org/MoneyMancer-Server/blob/main/client/main.js">client/main.js (Plaid Link onSuccess flow)</a></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="attestation" id="attestation-15">
+        <h3>15) Secure tokens and certificates for authentication</h3>
+        <blockquote>Attest that your organization uses secure tokens and certificates for authentication</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer authenticates to Plaid using access tokens issued by Plaid and stored server-side; these tokens are required for Plaid API calls and are never exposed in the front-end. The token exchange and storage behavior is defined in the Plaid ingestion code and database schema.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="https://github.com/your-org/MoneyMancer-Server/blob/main/server/ingestion/plaid/token_exchange.py">server/ingestion/plaid/token_exchange.py (access token exchange)</a></li>
+            <li><a href="https://github.com/your-org/MoneyMancer-Server/blob/main/server/db/migrations/01.00.00/07_init_plaid/01_init_plaid_schema.sql">server/db/migrations/.../01_init_plaid_schema.sql (plaid_items access_token column)</a></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="attestation" id="attestation-16">
+        <h3>16) Zero trust architecture</h3>
+        <blockquote>Attest that your organization has implemented a zero trust access architecture</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer has not implemented a zero trust architecture; the current environment is a single-developer deployment with network-based access. The current access model and planned future improvements are documented in the Access Control policy section below.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="#policy-access-control">Access Control policy (current state)</a></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="attestation" id="attestation-17">
+        <h3>17) Periodic access reviews and audits</h3>
+        <blockquote>Attest that your organization performs periodic access reviews and audits</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer does not yet have formal periodic access reviews; access is reviewed informally by the single developer when credentials or deployments change. The current review cadence and intent are documented in the Access Control policy section below.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="#policy-access-control">Access Control policy (current state)</a></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="attestation" id="attestation-18">
+        <h3>18) Data encryption at rest</h3>
+        <blockquote>Attest that your organization has implemented data encryption at-rest controls</blockquote>
+        <p><strong>Acknowledgement:</strong> MoneyMancer does not define explicit at-rest encryption controls in code; the project currently relies on database or hosting defaults. The current state and planned expectation are documented in the Data Retention &amp; Deletion policy section below.</p>
+        <details>
+          <summary>Details / Evidence</summary>
+          <ul>
+            <li><a href="#policy-retention">Data Retention &amp; Deletion policy (current state)</a></li>
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <section id="policies" class="card">
+      <h2>Project policies (current state)</h2>
+      <p>These policies describe how MoneyMancer currently operates as a single-developer project and where controls are planned but not yet implemented.</p>
+
+      <div class="policy" id="policy-access-control">
+        <h3>Access Control Policy</h3>
+        <ul>
+          <li>Scope: Single-developer (user 0) environment; no customer-facing accounts or multi-user roles.</li>
+          <li>Access granting: Local credentials and repository access are granted manually by the developer.</li>
+          <li>Access revocation: Credentials and repository permissions are removed manually when no longer needed.</li>
+          <li>Access reviews: Informal review occurs when deployments or credentials change.</li>
+          <li>Planned controls: Centralized IAM, RBAC, and enforced MFA on hosting and source-control accounts if additional users are added.</li>
+        </ul>
+      </div>
+
+      <div class="policy" id="policy-vuln-management">
+        <h3>Vulnerability &amp; Patch Management Policy</h3>
+        <ul>
+          <li>Current practice: Manual review of dependencies and runtime versions; no automated scanning configured yet.</li>
+          <li>Patching SLA (target): Critical — 7 days; High — 30 days; Medium/Low — best effort as part of regular maintenance.</li>
+          <li>EOL monitoring: Manual tracking of runtime and library EOL notices; automated tooling is planned.</li>
+        </ul>
+      </div>
+
+      <div class="policy" id="policy-retention">
+        <h3>Data Retention &amp; Deletion Policy</h3>
+        <ul>
+          <li>Retention: Plaid data is retained only for user 0’s personal finance use, with no automated retention schedule yet.</li>
+          <li>Deletion: On request by user 0, Plaid item records and related raw data are manually purged from the database.</li>
+          <li>Transaction deletions: In ingestion staging tables, deletions are represented by tombstoning rather than hard deletes.</li>
+          <li>At-rest controls: No explicit encryption configuration exists in code; encryption relies on the database/hosting defaults.</li>
+        </ul>
+      </div>
+
+      <div class="policy" id="policy-consent">
+        <h3>Consent Tracking Policy</h3>
+        <ul>
+          <li>Consent is obtained through the Plaid Link flow initiated by user 0.</li>
+          <li>Consent records are not yet stored in a dedicated audit table.</li>
+          <li>Planned improvement: Store consent metadata (timestamp, institution, items) alongside Plaid item records.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="last-updated" class="card">
+      <h2>Last updated</h2>
+      <p>2026-01-11</p>
+    </section>
+  </main>
+
+  <footer class="container">
+    <p>Contact: <a href="mailto:support@example.com">support@example.com</a></p>
+  </footer>
+</body>
+</html>
